@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="listaTelefonica">
+
+<head>
+    <title>Lista Telefonica</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../jQuery.js"></script>
+    <script src="../angularjs.js"></script>
+    <link rel="stylesheet" href="../bootstrap.min.css">
+    <script src="../bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="RodrigoBranas2 - listaTelefonica.css">
+    <script src="RodrigoBranas2 - listaTelefonica.js"></script>
+</head>
+
+<body ng-controller="listaTelefonicaCtrl">
+    <!--
+    <button class="btn btn-primary">teste</button>
+    -->
+    <div class="jumbotron">
+        <h4 ng-bind="app"></h4>
+        <h1>{{app}}</h1>
+        <div class="container">
+            <table class="table table-striped">
+                <tr>
+                    <th>nome</th>
+                    <th>telefone</th>
+                </tr>
+                <tr ng-repeat="contato in contatos">
+                    <td>{{contato.nome}}</td>
+                    <td>{{contato.telefone}}</td>
+                </tr>
+            </table>
+
+            <table class="table table-striped">
+                <tr>
+                    <th>nome</th>
+                    <th>telefone</th>
+                </tr>
+                <tr ng-repeat="contato in contatos">
+                    <td ng-repeat="(key, value) in contato">
+                        {{key +' - '+ value}}
+                    </td>
+                    {{contato}}
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!--
+        trecho de codigo destinado a armazenar valores inputados na tela passando como parametro cada
+        variavel
+    -->
+    <div class="jumbotron">
+        <input type="text" class="col-6" ng-model="nome" placeholder="Nome">
+        <input type="text" class="col-6" ng-model="telefone" placeholder="Telefone">
+        <p>{{nome}} {{telefone}}</p>
+        <button class="btn btn-success" ng-click="adicionarContato(nome,telefone)">adicionar contato</button>
+    </div>
+
+    <!--
+        Trecho de codigo destinado a armazenar um JSON como objeto da função
+    -->
+    <div class="jumbotron">
+        <input type="text" class="col-6" ng-model="contato.nome" placeholder="Nome">
+        <input type="text" class="col-6" ng-model="contato.telefone" placeholder="Telefone">
+        <p>{{contato}}</p>
+        <!-- Ng-disabled - bloqueia  -->
+        <button class="btn btn-success" ng-click="adicionarContato2(contato)" ng-disabled="!contato.nome || !contato.telefone">adicionar contato</button>
+    </div>
+
+    <!--
+            Trecho de codigo destinado a armazenar um JSON como objeto da função
+        -->
+    <div class="jumbotron">
+        <input type="text" class="col-6" ng-model="contato.nome" placeholder="Nome">
+        <input type="text" class="col-6" ng-model="contato.telefone" placeholder="Telefone">
+        <p>{{contato}}</p>
+        {{operadoras}}
+        <option value="">
+            <select name="" id=""></select>
+        </option>
+        <!-- Ng-disabled - bloqueia  -->
+        <button class="btn btn-success" ng-click="adicionarContato2(contato)" ng-disabled="!contato.nome || !contato.telefone">adicionar contato</button>
+    </div>
+
+</body>
+
+</html>
