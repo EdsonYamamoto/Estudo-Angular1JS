@@ -24,14 +24,25 @@
         <h4 ng-bind="app"></h4>
         <h1>{{app}}</h1>
         <div class="container">
-            <table class="table table-striped">
+            <table class="table">
                 <tr>
+                    <th></th>
                     <th>nome</th>
                     <th>telefone</th>
+                    <th>operadora</th>
+                    <th></th>
                 </tr>
-                <tr ng-repeat="contato in contatos">
+                {{contatos}}
+                <tr ng-repeat="contato in contatos" ng-class="{'selecionado negrito': contato.selecionado}">
+                    <td>
+                        <input type="checkbox" ng-model="contato.selecionado">
+                    </td>
                     <td>{{contato.nome}}</td>
                     <td>{{contato.telefone}}</td>
+                    <td>{{contato.operadora.nome}}</td>
+                    <td>
+                        <div class="selecaoSel" ng-style="{'background-color': contato.cor}"></div>
+                    </td>
                 </tr>
             </table>
 
@@ -50,20 +61,16 @@
         </div>
     </div>
 
-    <!--
-        trecho de codigo destinado a armazenar valores inputados na tela passando como parametro cada
-        variavel
-    -->
+    <!--trecho de codigo destinado a armazenar valores inputados na tela passando como parametro cadavariavel-->
     <div class="jumbotron">
+        <h3>asd</h3>
         <input type="text" class="col-6" ng-model="nome" placeholder="Nome">
         <input type="text" class="col-6" ng-model="telefone" placeholder="Telefone">
         <p>{{nome}} {{telefone}}</p>
         <button class="btn btn-success" ng-click="adicionarContato(nome,telefone)">adicionar contato</button>
     </div>
 
-    <!--
-        Trecho de codigo destinado a armazenar um JSON como objeto da função
-    -->
+    <!--Trecho de codigo destinado a armazenar um JSON como objeto da função-->
     <div class="jumbotron">
         <input type="text" class="col-6" ng-model="contato.nome" placeholder="Nome">
         <input type="text" class="col-6" ng-model="contato.telefone" placeholder="Telefone">
@@ -72,19 +79,34 @@
         <button class="btn btn-success" ng-click="adicionarContato2(contato)" ng-disabled="!contato.nome || !contato.telefone">adicionar contato</button>
     </div>
 
-    <!--
-            Trecho de codigo destinado a armazenar um JSON como objeto da função
-        -->
+    <!--Trecho de codigo destinado a armazenar um JSON como objeto da função-->
     <div class="jumbotron">
         <input type="text" class="col-6" ng-model="contato.nome" placeholder="Nome">
         <input type="text" class="col-6" ng-model="contato.telefone" placeholder="Telefone">
-        <p>{{contato}}</p>
-        {{operadoras}}
-        <option value="">
-            <select name="" id=""></select>
-        </option>
-        <!-- Ng-disabled - bloqueia  -->
+        <select class="form-control" ng-model="contato.operadora" ng-options="operadora.nome for operadora in operadoras">
+        </select>
         <button class="btn btn-success" ng-click="adicionarContato2(contato)" ng-disabled="!contato.nome || !contato.telefone">adicionar contato</button>
+    </div>
+
+    <!--Trecho de codigo destinado a armazenar um JSON como objeto da função-->
+    <div class="jumbotron">
+        <input type="text" class="col-6" ng-model="contato.nome" placeholder="Nome">
+        <input type="text" class="col-6" ng-model="contato.telefone" placeholder="Telefone">
+        <select class="form-control" ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras">
+        </select>
+        <button class="btn btn-success" ng-click="adicionarContato2(contato)" ng-disabled="!contato.nome || !contato.telefone">adicionar contato</button>
+    </div>
+
+    <div class="jumbotron">
+        <p>
+            <button class="btn btn-danger" ng-click="apagarContatos(contatos)"> contatos selecionados </button>
+        </p>
+        <p>
+            <button class="btn btn-danger" ng-disabled="isContatoSelecionado(contatos)"> contato selecionado? </button>
+        </p>
+        <p>
+            <button class="btn btn-danger" ng-disabled="isContatoSelecionado(contatos)" ng-click="apagarContatos(contatos)"> apaga contato selecionado </button>
+        </p>
     </div>
 
 </body>
